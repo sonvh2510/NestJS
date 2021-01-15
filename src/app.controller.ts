@@ -6,10 +6,8 @@ export class AppController {
     constructor(private readonly appService: AppService) {}
 
     @Get()
-    @Render('index.pug')
-    getHello() {
-        return {
-            message: 'Hello World',
-        };
+    @Render('index')
+    root() {
+        return this.appService.getHello();
     }
 }
