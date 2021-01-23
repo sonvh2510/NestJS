@@ -11,6 +11,9 @@ async function bootstrap() {
         AppModule,
         new ExpressAdapter(),
     );
+    app.enableCors({
+        origin: '*',
+    });
     app.useStaticAssets(join(__dirname, '..', 'public'), {
         prefix: '/public/',
     });
