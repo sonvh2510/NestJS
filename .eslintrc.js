@@ -15,7 +15,7 @@ module.exports = {
         node: true,
         jest: true,
     },
-    ignorePatterns: ['.eslintrc.js'],
+    ignorePatterns: ['.eslintrc.js', 'gulpfile.js'],
     rules: {
         '@typescript-eslint/interface-name-prefix': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
@@ -27,6 +27,9 @@ module.exports = {
                 endOfLine: 'auto',
             },
         ],
-        '@typescript-eslint/indent': ['error', 4],
+        indent: 'off',
+        '@typescript-eslint/indent': ['error'],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': ['error'],
     },
 };

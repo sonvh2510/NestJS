@@ -1,22 +1,19 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './admin/user/user.module';
+import { UserModule } from './modules/user/user.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { AuthenticateModule } from './modules/authenticate/authenticate.module';
 
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            type: 'mysql',
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: '',
-            database: 'nestjs',
-            entities: [],
-            synchronize: true,
+        MulterModule.registerAsync({
+            useFactory: () => ({
+                dest: './upload',
+            }),
         }),
         UserModule,
+        AuthenticateModule,
     ],
     controllers: [AppController],
     providers: [AppService],
