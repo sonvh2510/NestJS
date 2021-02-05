@@ -12,4 +12,7 @@ export class UserService {
     findAll(): Promise<User[]> {
         return this.userRepository.find();
     }
+    save(adminAccount): Promise<any> {
+        return this.userRepository.save(adminAccount);
+    }
 }

@@ -9,7 +9,7 @@ block main
 			.card
 				.row.align-items-center.text-center
 					.col-md-12
-						.card-body
+						.card-body.js-form(action="/authenticate/signup")
 							img.img-fluid.mb-4(src='/public/images/logo-dark.svg' alt='')
 							h4.mb-3.f-w-400= page_title
 							.input-group.mb-3
@@ -40,7 +40,7 @@ block main
 										| Send me the 
 										a(href='#!')  Newsletter
 										|  weekly.
-							button.btn.btn-primary.btn-block.mb-4 Sign up
+							button.js-form-submit.btn.btn-primary.btn-block.mb-4 Sign up
 							p.mb-2
 								| Already have an account? 
 								a.f-w-400(href='/authenticate/signin') Signin

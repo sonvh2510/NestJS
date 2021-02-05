@@ -3,6 +3,7 @@ const submitForm = () => {
     const forms = document.querySelectorAll('.js-form');
     forms.forEach((form) => {
         const button = form.querySelector('.js-form-submit');
+        const action = form.getAttribute('action');
         button.addEventListener('click', (e) => {
             e.preventDefault();
             const formData = {};
@@ -13,7 +14,7 @@ const submitForm = () => {
                 formData[name] = value;
             });
             $http
-                .post('/authenticate/signin', {
+                .post(action, {
                     body: formData,
                 })
                 .subscribe((res) => {
