@@ -8,17 +8,11 @@ export class User {
     })
     id: number;
 
-    @Column({ length: 32, type: 'varchar' })
-    first_name: string;
+    @Column({ length: 128, type: 'varchar', unique: true })
+    username: string;
 
-    @Column({ length: 32, type: 'varchar' })
-    last_name: string;
-
-    @Column({ length: 255, type: 'varchar' })
+    @Column({ length: 255, type: 'varchar', unique: true })
     email: string;
-
-    @Column({ length: 12, type: 'varchar' })
-    phone: string;
 
     @Column({ length: 60, type: 'char' })
     password: string;
@@ -31,7 +25,4 @@ export class User {
 
     @Column({ type: 'tinyint', default: 1 })
     is_enabled: boolean;
-
-    @Column({ type: 'tinyint', default: 0 })
-    is_deleted: boolean;
 }

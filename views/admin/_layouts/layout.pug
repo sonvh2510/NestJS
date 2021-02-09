@@ -1,0 +1,24 @@
+block var
+
+<!DOCTYPE html>
+html(lang="en")
+	head
+		block meta
+			include meta
+		block css
+			include css
+		title= page.title
+	body(class=bodyClass)
+		block header
+			include header
+		main
+			block sidebar
+				include ../_components/aside-bar.pug
+			section.pc-container
+				.pcoded-content
+					include ../_components/breadcrumb.pug
+					block main
+		block footer
+			include footer
+		block js
+			include js

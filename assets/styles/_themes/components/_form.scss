@@ -1,17 +1,47 @@
 // ============================
 //     Form css start
 // ============================
-.form-group label{
+.form-group label {
     font-weight: 500;
 }
-.input-group-text svg{
-    width: 18px;
-    height: 18px;
+.input-group-text {
+    svg,
+    .fal,
+    .fas,
+    .fab,
+    .far,
+    .fa {
+        width: 18px;
+        height: 18px;
+    }
+    .fal,
+    .fas,
+    .fab,
+    .far,
+    .fa {
+        font-size: 16px;
+    }
 }
 
-.form-control{
-    &[type="file"]{
+.form-control {
+    border-width: 1px;
+    &[type='file'] {
         padding: 0.42rem 1rem;
+    }
+}
+.form-note {
+    display: block;
+    &:first-letter {
+        text-transform: capitalize;
+    }
+    &-danger {
+        color: $danger;
+    }
+    &-success {
+        color: $success;
+    }
+    &-warning {
+        color: $warning;
     }
 }
 
@@ -19,98 +49,100 @@
 .input-group > .input-group-prepend > .input-group-text,
 .input-group > .input-group-append:not(:last-child) > .btn,
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
-.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
-.input-group > .input-group-append:last-child > .input-group-text:not(:last-child){
+.input-group
+    > .input-group-append:last-child
+    > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group
+    > .input-group-append:last-child
+    > .input-group-text:not(:last-child) {
     border-right: none;
 }
 // v1 Start
-.form-v1{
-
+.form-v1 {
     .form-label-group {
-      position: relative;
-      margin-bottom: 1rem;
+        position: relative;
+        margin-bottom: 1rem;
     }
 
     .form-label-group > input,
     .form-label-group > label {
-      height: 3.125rem;
-      padding: .75rem;
+        height: 3.125rem;
+        padding: 0.75rem;
     }
 
     .form-label-group > label {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      color: #495057;
-      pointer-events: none;
-      cursor: text; /* Match the input under the label */
-      border: 1px solid transparent;
-      border-radius: .25rem;
-      transition: all .1s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        color: #495057;
+        pointer-events: none;
+        cursor: text; /* Match the input under the label */
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        transition: all 0.1s ease-in-out;
     }
 
     .form-label-group input::-webkit-input-placeholder {
-      color: transparent;
+        color: transparent;
     }
 
     .form-label-group input::-ms-input-placeholder {
-      color: transparent;
+        color: transparent;
     }
 
     .form-label-group input::-moz-placeholder {
-      color: transparent;
+        color: transparent;
     }
 
     .form-label-group input::placeholder {
-      color: transparent;
+        color: transparent;
     }
 
     .form-label-group input:not(:-moz-placeholder-shown) {
-      padding-top: 1.25rem;
-      padding-bottom: .25rem;
+        padding-top: 1.25rem;
+        padding-bottom: 0.25rem;
     }
 
     .form-label-group input:not(:placeholder-shown) {
-      padding-top: 1.25rem;
-      padding-bottom: .25rem;
+        padding-top: 1.25rem;
+        padding-bottom: 0.25rem;
     }
 
     .form-label-group input:not(:-moz-placeholder-shown) ~ label {
-      padding-top: .25rem;
-      padding-bottom: .25rem;
-      font-size: 12px;
-      color: #777;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        font-size: 12px;
+        color: #777;
     }
 
     .form-label-group input:not(:placeholder-shown) ~ label {
-      padding-top: .25rem;
-      padding-bottom: .25rem;
-      font-size: 12px;
-      color: #777;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        font-size: 12px;
+        color: #777;
     }
-
 }
 // v1 end
 // v2 Start
-.form-v2{
-    .form-group{
+.form-v2 {
+    .form-group {
         position: relative;
-        &.fill{
-            .floating-label{
+        &.fill {
+            .floating-label {
                 opacity: 0.6;
                 font-size: 85%;
             }
         }
     }
-    .floating-label{
+    .floating-label {
         position: absolute;
         top: 6px;
         left: 16px;
-        transition: all .3s ease-in-out;
+        transition: all 0.3s ease-in-out;
     }
-    .form-control{
+    .form-control {
         height: auto;
         padding-top: 30px;
     }
@@ -306,8 +338,8 @@
 
 .tagify__tag {
     --tag-bg: #{$body-bg};
-    --tag-hover: #{transparentize($primary,0.7)};
-    --tag-remove-bg: #{transparentize($danger,0.7)};
+    --tag-hover: #{transparentize($primary, 0.7)};
+    --tag-remove-bg: #{transparentize($danger, 0.7)};
     --tag-remove-btn-bg--hover: #{$danger};
     @each $color, $value in $theme-colors {
         &.tagify__tag--#{$color} {
@@ -344,7 +376,7 @@
 // bootstrap-select start
 
 .bootstrap-select {
-    > .dropdown-toggle.bs-placeholder.btn[class*="btn-"]:not(.btn-light) {
+    > .dropdown-toggle.bs-placeholder.btn[class*='btn-']:not(.btn-light) {
         color: #fff;
     }
 }
@@ -371,7 +403,7 @@
         &:active,
         &:focus,
         &:hover {
-            background: transparentize($primary,0.97);
+            background: transparentize($primary, 0.97);
             color: $primary;
         }
     }
@@ -538,18 +570,18 @@
 .uppy-Dashboard--modal {
     z-index: 1030;
 }
-.uppy-DragDrop--is-dragdrop-supported{
+.uppy-DragDrop--is-dragdrop-supported {
     border-color: $body-bg;
 }
-.pc-uppy-thumbnail-container{
-    .pc-uppy-thumbnail{
-        img{
+.pc-uppy-thumbnail-container {
+    .pc-uppy-thumbnail {
+        img {
             width: 100px;
         }
     }
 }
 // uppy end
-.slider-selection{
+.slider-selection {
     box-shadow: none;
 }
 // ============================

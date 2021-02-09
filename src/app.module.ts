@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './modules/user/user.module';
+import { UserModule } from './modules/admin/user/user.module';
 import { MulterModule } from '@nestjs/platform-express';
-import { AuthenticateModule } from './modules/authenticate/authenticate.module';
+import { AuthenticateModule } from './modules/admin/authenticate/authenticate.module';
 
 @Module({
     imports: [

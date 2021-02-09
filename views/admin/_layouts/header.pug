@@ -1,0 +1,81 @@
+// [ Header ] start
+header.pc-header
+	.header-wrapper
+		.mr-auto.pc-mob-drp
+			ul.list-unstyled
+				li.dropdown.pc-h-item
+					a.pc-head-link.active.dropdown-toggle.arrow-none.mr-0(data-toggle='dropdown' href='#' role='button' aria-haspopup='false' aria-expanded='false')
+						| Level
+					.dropdown-menu.pc-h-dropdown
+						a.dropdown-item(href='#!')
+							span.fal.fa-user-alt
+							span My Account
+						.pc-level-menu
+							a.dropdown-item(href='#!')
+								i(data-feather='menu')
+								span.float-right
+									span.fal.fa-chevron-right
+								span Level2.1
+							.dropdown-menu.pc-h-dropdown
+								a.dropdown-item(href='#!')
+									i.fal.fa-circle
+									span My Account
+								a.dropdown-item(href='#!')
+									i.fal.fa-circle
+									span Settings
+								a.dropdown-item(href='#!')
+									i.fal.fa-circle
+									span Support
+								a.dropdown-item(href='#!')
+									i.fal.fa-circle
+									span Lock Screen
+								a.dropdown-item(href='#!')
+									i.fal.fa-circle
+									span Logout
+						a.dropdown-item(href='#!')
+							i(data-feather='settings')
+							span Settings
+						a.dropdown-item(href='#!')
+							i(data-feather='life-buoy')
+							span Support
+						a.dropdown-item(href='#!')
+							i(data-feather='lock')
+							span Lock Screen
+						a.dropdown-item(href='#!')
+							i(data-feather='power')
+							span Logout
+		.ml-auto
+			ul.list-unstyled
+				li.dropdown.pc-h-item
+					a.pc-head-link.dropdown-toggle.arrow-none.mr-0(data-toggle='dropdown' href='#' role='button' aria-haspopup='false' aria-expanded='false')
+						span.fal.fa-search
+					.dropdown-menu.dropdown-menu-right.pc-h-dropdown.drp-search
+						form.px-3
+							.form-group.mb-0.d-flex.align-items-center
+								span.fal.fa-search
+								input.form-control.border-0.shadow-none(type='search' placeholder='Search here. . .')
+				li.dropdown.pc-h-item
+					a.pc-head-link.dropdown-toggle.arrow-none.mr-0(data-toggle='dropdown' href='#' role='button' aria-haspopup='false' aria-expanded='false')
+						img.user-avtar(src='/public/images/user/avatar-2.jpg' alt='user-image')
+						span
+							span.user-name Joseph William
+							span.user-desc Administrator
+					.dropdown-menu.dropdown-menu-right.pc-h-dropdown
+						.dropdown-header
+							h6.text-overflow.m-0 Welcome !
+						a.dropdown-item(href='#!')
+							i(data-feather='user')
+							span My Account
+						a.dropdown-item(href='#!')
+							i(data-feather='settings')
+							span Settings
+						a.dropdown-item(href='#!')
+							i(data-feather='life-buoy')
+							span Support
+						a.dropdown-item(href='#!')
+							i(data-feather='lock')
+							span Lock Screen
+						a.dropdown-item(href='#!')
+							i(data-feather='power')
+							span Logout
+// [ Header ] end
