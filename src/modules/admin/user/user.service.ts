@@ -36,6 +36,10 @@ export class UserService {
         return this.userRepository.save(account);
     }
 
+    update(id: number, options: User) {
+        return this.userRepository.update(id, options);
+    }
+
     delete(id: number): Promise<any> {
         return this.userRepository.delete(id);
     }

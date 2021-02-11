@@ -38,7 +38,6 @@ block breadcrumb
 												td.text-center #{user.role}
 												td.text-center #{user.is_enabled}
 												td.text-center 
-													form(method="post" action="/admin/user/delete/"+user.id)
-														a.btn.btn-info.shadow(href="/admin/user/edit/"+user.id) Edit
-														button.btn.btn-danger.shadow.ml-2 Remove
+													a.btn.btn-info.shadow(href="/admin/user/edit/"+user.id) Edit
+													a.btn.btn-danger.shadow.ml-2(href="/admin/user/delete/"+user.id) Remove
 							include _components/pagination

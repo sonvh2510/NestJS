@@ -4,6 +4,7 @@ import {
     Get,
     Param,
     Post,
+    Put,
     Redirect,
     Render,
     Req,
@@ -24,7 +25,7 @@ import bcrypt = require('bcrypt');
 export class UserController {
     constructor(private userService: UserService) {}
     @Get()
-    @Redirect('user/list')
+    @Redirect('/admin/user/list')
     root() {
         return {};
     }
@@ -127,7 +128,7 @@ export class UserController {
     }
 
     @Get('edit/:accountID')
-    @Render('admin/user-create')
+    @Render('admin/user-edit')
     async get_editAccount(@Req() req: Request, @Param() params) {
         const accountID = params.accountID;
         try {
@@ -140,9 +141,9 @@ export class UserController {
                         url: req.route.path,
                     },
                     data: {
+                        id: user.id,
                         username: user.username,
                         email: user.email,
-                        password: user.password,
                         role: user.role,
                     },
                 };
@@ -152,21 +153,21 @@ export class UserController {
         }
     }
 
-    @Post('delete/:accountID')
-    async post_deleteUser(
-        @Req() req: Request,
+    @Post('edit/:accountID')
+    async post_editAccount(
+        @Body() body,
         @Res() res: Response,
         @Param() params,
     ) {
-        const email = params.email;
-        try {
-            const user = await this.userService.findByEmail(email);
-            if (user) {
-                await this.userService.delete(user.id);
-            }
-            return res.redirect('/admin/user');
-        } catch (error) {
-            console.error(error);
-        }
+        const { accountID } = params;
+        await this.userService.update(accountID, body);
+        return res.redirect(`/admin/user/edit/${accountID}`);
+    }
+
+    @Get('delete/:accountID')
+    async post_deleteUser(@Res() res: Response, @Param() params) {
+        const { accountID } = params;
+        await this.userService.delete(accountID);
+        return res.redirect('/admin/user');
     }
 }
