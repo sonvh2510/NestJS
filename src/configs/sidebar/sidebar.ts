@@ -23,6 +23,7 @@ export const SIDEBAR = [
             },
             {
                 title: 'Blog',
+                url: '/admin/blog',
                 children: [
                     {
                         title: 'List',
