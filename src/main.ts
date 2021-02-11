@@ -8,6 +8,7 @@ import { join } from 'path';
 import flash = require('connect-flash');
 import session = require('express-session');
 import * as cookieParser from 'cookie-parser';
+const PORT = process.env.PORT || 3000;
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(
@@ -33,6 +34,6 @@ async function bootstrap() {
     });
     app.setViewEngine('pug');
     app.setBaseViewsDir(join(__dirname, '..', 'views'));
-    await app.listen(3000);
+    await app.listen(PORT);
 }
 bootstrap();

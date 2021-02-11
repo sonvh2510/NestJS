@@ -4,6 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 @Injectable()
 export class AdminGuardMiddleware implements NestMiddleware {
     use(req: Request, res: Response, next: NextFunction) {
+        console.log(req.cookies['authorization']);
+
         next();
     }
 }
