@@ -1,0 +1,21 @@
+extends _layouts/layout
+
+block var
+	- bodyClass = "blog blog-create"
+	
+block header
+	include _layouts/header
+
+block sidebar
+	include _components/aside-bar.pug
+
+block breadcrumb
+	section.pc-container
+		.pcoded-content
+			include _components/breadcrumb.pug
+			// Main Wrapper
+			.row
+				.col-12
+					.card
+						.card-header
+							h5 Create new blog

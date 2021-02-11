@@ -9,9 +9,9 @@ export class SignInMiddleware implements NestMiddleware {
             ? JSON.parse(authorization)['access_token']
             : null;
         if (access_token) {
-            res.redirect('/admin/dashboard');
+            return res.redirect('/admin/dashboard');
         } else {
-            next();
+            return next();
         }
     }
 }
