@@ -45,7 +45,7 @@ export class AuthenticateController {
             'authorization',
             JSON.stringify({ ...req.user, access_token }),
             {
-                expires: new Date(Date.now() + 900000),
+                expires: new Date(Date.now() + 1800000),
             },
         );
         return res.redirect('/admin/dashboard');
