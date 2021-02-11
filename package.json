@@ -7,12 +7,12 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build && npm run start:prod",
+    "build": "nest build && node dist/main.js",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npm run prebuild && npm run start:dev",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -20,7 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "style": "gulp dev --mode=development",
-    "style:prod": "gulp prod --mode=production"
+    "style:prod": "gulp prod --mode=production",
+    "heroku-postbuild": "nest build && node dist/main.js"
   },
   "dependencies": {
     "@nestjs/common": "^7.5.1",
@@ -120,5 +121,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "engines": {
+    "node": "14.15.1",
+    "npm": "7.5.2"
   }
 }
