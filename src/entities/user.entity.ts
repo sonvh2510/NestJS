@@ -1,7 +1,17 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+export interface User {
+    id?: number;
+    username?: string;
+    email?: string;
+    password?: string;
+    created_date?: string;
+    role?: number;
+    is_enabled?: boolean;
+}
 @Entity('account_admin')
-export class User {
+export class UserEntity {
+    user: User;
     @PrimaryGeneratedColumn({
         type: 'int',
         unsigned: true,

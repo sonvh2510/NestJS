@@ -10,14 +10,10 @@ html(lang="en")
 		title= page.title
 	body(class=bodyClass)
 		block header
-			include header
 		main
 			block sidebar
-				include ../_components/aside-bar.pug
-			section.pc-container
-				.pcoded-content
-					include ../_components/breadcrumb.pug
-					block main
+			block breadcrumb
+			block main
 		block footer
 			include footer
 		block js

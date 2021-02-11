@@ -4,22 +4,30 @@ import {
     Get,
     Param,
     Post,
+    Redirect,
     Render,
     Req,
     Res,
-    UploadedFiles,
-    UseInterceptors,
+    UseFilters,
+    UseGuards,
 } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
 import { Request, Response } from 'express';
-import { diskStorage } from 'multer';
 import { SIDEBAR } from 'src/configs/sidebar/sidebar';
 import { UserService } from 'src/modules/admin/user/user.service';
-const bcrypt = require('bcrypt');
+import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
+import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
+import bcrypt = require('bcrypt');
 
 @Controller('admin/user')
+@UseGuards(AdminAuthJwtFilter)
+@UseFilters(AdminAuthAccessFilter)
 export class UserController {
     constructor(private user: UserService) {}
+    @Get()
+    @Redirect('user/list')
+    root() {
+        return {};
+    }
 
     @Get('list')
     @Render('admin/user')
@@ -40,8 +48,6 @@ export class UserController {
     @Get('create')
     @Render('admin/user-create')
     get_createUser(@Req() req: Request) {
-        console.log(req.route.path);
-
         return {
             page: {
                 title: 'Create new account',
@@ -74,8 +80,8 @@ export class UserController {
         req.flash('email', email);
         req.flash('password', password);
         req.flash('role', role);
-        const user_email = await this.user.findBy({ email });
-        const user_username = await this.user.findBy({ username });
+        const user_email = await this.user.findByEmail(email);
+        const user_username = await this.user.findByUsername(username);
         const user_role = isNaN(role);
 
         if (email == '') {
@@ -125,9 +131,7 @@ export class UserController {
     async get_editAccount(@Req() req: Request, @Param() params) {
         const accountID = params.accountID;
         try {
-            const user = await this.user.findBy({
-                id: accountID,
-            });
+            const user = await this.user.findById(accountID);
             if (user) {
                 return {
                     page: {
@@ -154,47 +158,15 @@ export class UserController {
         @Res() res: Response,
         @Param() params,
     ) {
-        const accountID = params.accountID;
+        const email = params.email;
         try {
-            const user = await this.user.findBy({
-                id: accountID,
-            });
+            const user = await this.user.findByEmail(email);
             if (user) {
-                await this.user.delete(parseInt(accountID));
+                await this.user.delete(user.id);
             }
             return res.redirect('/admin/user');
         } catch (error) {
             console.error(error);
         }
     }
-
-    // @Post('upload')
-    // @UseInterceptors(
-    //     FilesInterceptor('files[]', 20, {
-    //         storage: diskStorage({
-    //             destination: './upload',
-    //             filename: (req, file, callback) => {
-    //                 callback(null, file.originalname);
-    //             },
-    //         }),
-    //     }),
-    // )
-    // addUser(@Body() body, @Res() res: Response, @UploadedFiles() files) {
-    //     if (files) {
-    //         files.forEach((file) => {
-    //             console.log(file);
-    //         });
-    //     }
-    //     console.log(files);
-    //     console.log(body);
-
-    //     return res.status(200).json({
-    //         data: {
-    //             files,
-    //             body,
-    //         },
-    //         error: res.statusMessage,
-    //         statusCode: res.statusCode,
-    //     });
-    // }
 }

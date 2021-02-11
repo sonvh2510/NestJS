@@ -1,47 +1,61 @@
 import {
-    Body,
     Controller,
     Get,
     Post,
-    Redirect,
     Render,
+    Req,
     Res,
+    UnauthorizedException,
+    UseFilters,
+    UseGuards,
 } from '@nestjs/common';
-import { Response } from 'express';
-import { AuthenticateService } from 'src/modules/admin/authenticate/authenticate.service';
+import { Request, Response } from 'express';
+import { AuthenticateService } from './authenticate.service';
+import { AdminAuthLocalGuard } from './admin-auth-local.guard';
+import { AdminAuthAccessFilter } from './admin-auth-access.filter';
+import { AdminAuthJwtFilter } from './admin-auth-jwt.guard';
 
-@Controller({
-    path: 'auth',
-})
+@Controller('admin/auth')
 export class AuthenticateController {
-    constructor(private userService: AuthenticateService) {}
+    constructor(private authenticateService: AuthenticateService) {}
+
+    @Get()
+    root(@Res() res: Response) {
+        return res.redirect('/admin/auth/signin');
+    }
 
     @Get('signin')
-    @Render('signin')
-    signin() {
+    @Render('admin/signin')
+    get_signIn() {
         return {
-            page_title: 'Sign in',
+            page: {
+                title: 'Sign in',
+            },
         };
     }
 
+    @UseGuards(AdminAuthLocalGuard)
+    @UseFilters(AdminAuthAccessFilter)
     @Post('signin')
-    @Render('signin')
-    signinPostHandler(@Body() body) {
-        console.log(body);
+    async post_signIn(@Req() req: Request, @Res() res: Response) {
+        const access_token = await this.authenticateService.generateToken(
+            req.user,
+        );
+        res.cookie(
+            'authorization',
+            JSON.stringify({ ...req.user, access_token }),
+            {
+                expires: new Date(Date.now() + 900000),
+            },
+        );
+        return res.redirect('/admin/dashboard');
     }
 
-    @Get('signup')
-    @Render('signup')
-    signup() {
-        return {
-            page_title: 'Sign up',
-        };
-    }
-
-    @Post('signup')
-    @Redirect('signin')
-    async signupPostHandler(@Res() res: Response, @Body() body) {
-        const { username, email, password } = body;
-        console.log();
+    @UseGuards(AdminAuthJwtFilter)
+    @UseFilters(AdminAuthAccessFilter)
+    @Get('signout')
+    async post_signOut(@Req() req: Request, @Res() res: Response) {
+        await res.clearCookie('authorization', { path: '/' });
+        throw new UnauthorizedException();
     }
 }

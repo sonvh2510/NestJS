@@ -9,24 +9,33 @@ export class UserService {
         private userRepository: Repository<User>,
     ) {}
 
-    findBy(field: any): Promise<User> {
-        return this.userRepository.findOne(field);
+    findAll(options?: User): Promise<User[]> {
+        return this.userRepository.find(options);
     }
 
-    findAll(): Promise<User[]> {
-        return this.userRepository.find();
+    findById(id: number): Promise<User | undefined> {
+        return this.userRepository.findOne({ id });
     }
 
-    count(field: string): Promise<any> {
+    findByEmail(email: string): Promise<User | undefined> {
+        return this.userRepository.findOne({ email });
+    }
+
+    findByUsername(username: string): Promise<User | undefined> {
+        return this.userRepository.findOne({ username });
+    }
+
+    count(field: string | number | boolean): Promise<number> {
         return this.userRepository
             .createQueryBuilder('user')
             .select(`SUM(user.${field})`, 'sum')
             .getCount();
     }
 
-    save(adminAccount): Promise<any> {
-        return this.userRepository.save(adminAccount);
+    save(account: User): Promise<any> {
+        return this.userRepository.save(account);
     }
+
     delete(id: number): Promise<any> {
         return this.userRepository.delete(id);
     }

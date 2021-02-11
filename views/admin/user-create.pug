@@ -3,41 +3,51 @@ extends _layouts/layout
 block var
 	- bodyClass = "user user-create"
 	- fakeOptions = [{value: '1',title: 'Admin'},{value: '2',title: 'Moderator'},{value: '3',title: 'Writer'},{value: '4',title: 'Editor'},{value: '5',title: 'Checker'}]
+	
+block header
+	include _layouts/header
 
-block main
-	.row
-		.col-lg-8.col-xl-6
-			.card
-				.card-header
-					h5 Create new account
-				.card-body
-					form.form-v1(action="/admin/user/create" method="post" autocomplete="off")
-						.form-group.mb-4
-							label(for='username') Username
-							input#username.form-control(type='text' aria-describedby='username-help' name="username" autocomplete="off" value=data.username)
-							-if(message)
-								span#password-help.form-text.text-danger= message.user_usernameError
-						.form-group.mb-4
-							label(for='email') Email address
-							input#email.form-control.shadow-sm(type='email' aria-describedby='email-help' placeholder='Enter email' name="email" autocomplete="off" value=data.email)
-							-if(message)
-								span#password-help.form-text.text-danger= message.user_emailError
-						.form-group.mb-4
-							label(for='password') Password
-							input#password.form-control.shadow-sm(type='password' aria-describedby='password-help' placeholder='Enter Password' name="password" autocomplete="off" value=data.password)
-							-if(message)
-								span#password-help.form-text.text-danger= message.user_passwordError
-						.form-group.mb-4
-							label(for='role') Email address
-							select#role.form-control.shadow-sm(aria-describedby='role-help' name="role")
-								option(selected value="default") Choose a role for account
-								each option in fakeOptions
-									- if(data.role == option.value)
-										option(value=option.value selected='selected')= option.title
-									- else
-										option(value=option.value)= option.title
-							-if(message)
-								span#password-help.form-text.text-danger= message.user_roleError
-						.form-group
-							button.btn.btn-shadow.btn-success(type="submit") Create new account
-							button.btn.btn-shadow.btn-light.ml-3(type="reset") Clear
+block sidebar
+	include _components/aside-bar.pug
+
+block breadcrumb
+	section.pc-container
+		.pcoded-content
+			include _components/breadcrumb.pug
+			// Main Wrapper
+			.row
+				.col-auto
+					.card(style="width: 550px; max-width: 100%")
+						.card-header
+							h5 Create new account
+						.card-body
+							form.form-v1(action="/admin/user/create" method="post" autocomplete="off")
+								.form-group.mb-4
+									label(for='username') Username
+									input#username.form-control(type='text' aria-describedby='username-help' name="username" autocomplete="off" value=data.username)
+									-if(message)
+										span#password-help.form-text.text-danger= message.user_usernameError
+								.form-group.mb-4
+									label(for='email') Email address
+									input#email.form-control.shadow-sm(type='email' aria-describedby='email-help' placeholder='Enter email' name="email" autocomplete="off" value=data.email)
+									-if(message)
+										span#password-help.form-text.text-danger= message.user_emailError
+								.form-group.mb-4
+									label(for='password') Password
+									input#password.form-control.shadow-sm(type='password' aria-describedby='password-help' placeholder='Enter Password' name="password" autocomplete="off" value=data.password)
+									-if(message)
+										span#password-help.form-text.text-danger= message.user_passwordError
+								.form-group.mb-4
+									label(for='role') Email address
+									select#role.form-control.shadow-sm(aria-describedby='role-help' name="role")
+										option(selected value="default") Choose a role for account
+										each option in fakeOptions
+											- if(data.role == option.value)
+												option(value=option.value selected='selected')= option.title
+											- else
+												option(value=option.value)= option.title
+									-if(message)
+										span#password-help.form-text.text-danger= message.user_roleError
+								.form-group.text-right
+									button.btn.btn-shadow.btn-light(type="reset") Clear
+									button.btn.btn-shadow.btn-success.ml-3(type="submit") Create new account

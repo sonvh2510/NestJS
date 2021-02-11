@@ -1,7 +1,7 @@
 export const SIDEBAR = [
     {
-        label: 'Navigation',
-        caption: 'UI Components',
+        label: 'Manage Website',
+        caption: 'All functions of website ',
         children: [
             {
                 title: 'Dashboard',
@@ -33,6 +33,16 @@ export const SIDEBAR = [
                         url: '/admin/blog/create',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        label: 'My account',
+        caption: 'Change password',
+        children: [
+            {
+                title: 'My account',
+                url: '/admin/my-account',
             },
         ],
     },

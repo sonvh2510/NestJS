@@ -5,8 +5,9 @@ import {
     NestExpressApplication,
 } from '@nestjs/platform-express';
 import { join } from 'path';
-const flash = require('connect-flash');
-const session = require('express-session');
+import flash = require('connect-flash');
+import session = require('express-session');
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(
@@ -16,11 +17,13 @@ async function bootstrap() {
     app.enableCors({
         origin: '*',
     });
+    // somewhere in your initialization file
+    app.use(cookieParser());
     app.use(
         session({
             secret: 'secret_of_wibu',
             resave: false,
-            saveUninitialized: true,
+            saveUninitialized: false,
             cookie: { secure: false },
         }),
     );

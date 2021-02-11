@@ -1,4 +1,4 @@
-import { User } from '../../entities/user.entity';
+import { UserEntity } from '../../entities/user.entity';
 import { createConnection } from 'typeorm';
 
 export const DatabaseProviders = [
@@ -12,7 +12,7 @@ export const DatabaseProviders = [
                 username: 'root',
                 password: 'self125094',
                 database: 'goldprice',
-                entities: [User],
+                entities: [UserEntity],
             }),
     },
 ];

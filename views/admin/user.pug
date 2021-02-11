@@ -2,33 +2,43 @@ extends _layouts/layout
 
 block var
 	- bodyClass = "user user-list"
+	
+block header
+	include _layouts/header
 
-block main
-	.row
-		.col-12
-			.card
-				.card-header
-					h5 User List
-					span.d-block.m-t-5 Show all users
-				.card-body.table-border-style
-					.table-responsive
-						table.table.table-striped
-							thead
-								tr
-									th Username
-									th.text-center Email
-									th.text-center Role
-									th.text-center Is enabled?
-									th.text-center Actions
-							tbody
-								each user in data.users
-									tr
-										td #{user.username}
-										td.text-center #{user.email}
-										td.text-center #{user.role}
-										td.text-center #{user.is_enabled}
-										td.text-center 
-											form(method="post" action="/admin/user/delete/"+user.id)
-												a.btn.btn-info.shadow(href="/admin/user/edit/"+user.id) Edit
-												button.btn.btn-danger.shadow.ml-2 Remove
-					include _components/pagination
+block sidebar
+	include _components/aside-bar.pug
+
+block breadcrumb
+	section.pc-container
+		.pcoded-content
+			include _components/breadcrumb.pug
+			// Main Wrapper
+			.row
+				.col-12
+					.card
+						.card-header
+							h5 User List
+							span.d-block.m-t-5 Show all users
+						.card-body.table-border-style
+							.table-responsive
+								table.table.table-striped
+									thead
+										tr
+											th Username
+											th.text-center Email
+											th.text-center Role
+											th.text-center Is enabled?
+											th.text-center Actions
+									tbody
+										each user in data.users
+											tr
+												td #{user.username}
+												td.text-center #{user.email}
+												td.text-center #{user.role}
+												td.text-center #{user.is_enabled}
+												td.text-center 
+													form(method="post" action="/admin/user/delete/"+user.id)
+														a.btn.btn-info.shadow(href="/admin/user/edit/"+user.id) Edit
+														button.btn.btn-danger.shadow.ml-2 Remove
+							include _components/pagination
