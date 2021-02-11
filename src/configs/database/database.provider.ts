@@ -7,10 +7,10 @@ export const DatabaseProviders = [
         useFactory: async () =>
             await createConnection({
                 type: 'mysql',
-                host: 'localhost',
-                port: 3306,
-                username: 'root',
-                password: 'self125094',
+                host:
+                    'mysql://b5a3508b43ac7c:8786fb87@us-cdbr-east.cleardb.com/heroku_97b9736828909fe?reconnect=true',
+                username: 'b5a3508b43ac7c',
+                password: '8786fb87',
                 database: 'goldprice',
                 entities: [UserEntity],
             }),
