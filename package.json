@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build && node dist/main.js",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npm run prebuild && npm run start:dev",
     "start:dev": "nest start --watch",
@@ -20,8 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "style": "gulp dev --mode=development",
-    "style:prod": "gulp prod --mode=production",
-    "heroku-postbuild": "nest build && node dist/main.js"
+    "style:prod": "gulp prod --mode=production"
   },
   "dependencies": {
     "@nestjs/common": "^7.5.1",
