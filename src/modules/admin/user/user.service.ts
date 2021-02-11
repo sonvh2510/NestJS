@@ -32,7 +32,7 @@ export class UserService {
             .getCount();
     }
 
-    save(account: User): Promise<any> {
+    save(account: any): Promise<any> {
         return this.userRepository.save(account);
     }
 

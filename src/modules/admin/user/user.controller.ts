@@ -22,7 +22,7 @@ import bcrypt = require('bcrypt');
 @UseGuards(AdminAuthJwtFilter)
 @UseFilters(AdminAuthAccessFilter)
 export class UserController {
-    constructor(private user: UserService) {}
+    constructor(private userService: UserService) {}
     @Get()
     @Redirect('user/list')
     root() {
@@ -32,7 +32,7 @@ export class UserController {
     @Get('list')
     @Render('admin/user')
     async listUser(@Req() req: Request) {
-        const users = await this.user.findAll();
+        const users = await this.userService.findAll();
         return {
             page: {
                 title: 'Users',
@@ -80,8 +80,8 @@ export class UserController {
         req.flash('email', email);
         req.flash('password', password);
         req.flash('role', role);
-        const user_email = await this.user.findByEmail(email);
-        const user_username = await this.user.findByUsername(username);
+        const user_email = await this.userService.findByEmail(email);
+        const user_username = await this.userService.findByUsername(username);
         const user_role = isNaN(role);
 
         if (email == '') {
@@ -113,7 +113,7 @@ export class UserController {
         } else {
             const hashedPassword = await bcrypt.hash(password, 12);
             try {
-                await this.user.save({
+                await this.userService.save({
                     email,
                     username,
                     password: hashedPassword,
@@ -131,7 +131,7 @@ export class UserController {
     async get_editAccount(@Req() req: Request, @Param() params) {
         const accountID = params.accountID;
         try {
-            const user = await this.user.findById(accountID);
+            const user = await this.userService.findById(accountID);
             if (user) {
                 return {
                     page: {
@@ -160,9 +160,9 @@ export class UserController {
     ) {
         const email = params.email;
         try {
-            const user = await this.user.findByEmail(email);
+            const user = await this.userService.findByEmail(email);
             if (user) {
-                await this.user.delete(user.id);
+                await this.userService.delete(user.id);
             }
             return res.redirect('/admin/user');
         } catch (error) {

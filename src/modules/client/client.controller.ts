@@ -1,6 +1,6 @@
 import { Controller, Get, Render } from '@nestjs/common';
 
-@Controller('client')
+@Controller()
 export class ClientController {
     @Get()
     @Render('client/index')
