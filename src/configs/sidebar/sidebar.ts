@@ -27,7 +27,7 @@ export const SIDEBAR = [
                 children: [
                     {
                         title: 'List',
-                        url: '/admin/blog',
+                        url: '/admin/blog/list',
                     },
                     {
                         title: 'Create',
