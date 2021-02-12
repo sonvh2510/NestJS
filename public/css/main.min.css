@@ -17403,6 +17403,7 @@ File: style.css
     border-radius: 3px;
     display: inline-block;
     background: #f0f2f8;
+    cursor: pointer;
     overflow: hidden;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28); }
     .doc-img > a + a,
