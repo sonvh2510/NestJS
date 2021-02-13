@@ -1,8 +1,20 @@
-import { Controller, Get, Redirect, Render, Req } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Redirect,
+    Render,
+    Req,
+    UseFilters,
+    UseGuards,
+} from '@nestjs/common';
 import { BaseRender } from 'src/helpers/base-render';
 import { RequestCustomize } from 'src/interfaces/request-custom';
+import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
+import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
 
 @Controller('admin/account-setting')
+@UseGuards(AdminAuthJwtFilter)
+@UseFilters(AdminAuthAccessFilter)
 export class AccountSettingController {
     constructor() {}
 
