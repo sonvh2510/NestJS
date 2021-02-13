@@ -12,7 +12,7 @@ import { AuthenticateService } from './authenticate.service';
 import { jwtConstants } from './contansts';
 import { AdminAuthJwtStrategy } from './admin-auth-jwt.strategy';
 import { AdminAuthLocalStrategy } from './admin-auth-local.strategy';
-import { SignInMiddleware } from './signin.middleware';
+import { SignInMiddleware } from '../../../middlewares/signin.middleware';
 
 @Module({
     imports: [

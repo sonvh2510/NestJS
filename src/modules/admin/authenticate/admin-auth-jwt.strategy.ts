@@ -4,10 +4,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { jwtConstants } from './contansts';
 
 export const cookieExtractor = (req) => {
-    let token = null;
-    const { authorization } = req.cookies;
-    token = authorization ? JSON.parse(authorization)['access_token'] : null;
-    return token;
+    const { gp_auth } = req.cookies;
+    return gp_auth ? gp_auth : null;
 };
 
 @Injectable()

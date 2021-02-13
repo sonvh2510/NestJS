@@ -4,7 +4,6 @@ import {
     Get,
     Param,
     Post,
-    Put,
     Redirect,
     Render,
     Req,
@@ -12,12 +11,14 @@ import {
     UseFilters,
     UseGuards,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { SIDEBAR } from 'src/configs/sidebar/sidebar';
+import { Response } from 'express';
+import { SIDEBAR } from 'src/configs/sidebar';
 import { UserService } from 'src/modules/admin/user/user.service';
 import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
 import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
 import bcrypt = require('bcrypt');
+import { RequestCustomize } from 'src/interfaces/request-custom';
+import { BaseRender } from 'src/helpers/base-render';
 
 @Controller('admin/user')
 @UseGuards(AdminAuthJwtFilter)
@@ -31,48 +32,40 @@ export class UserController {
     }
 
     @Get('list')
-    @Render('admin/user')
-    async listUser(@Req() req: Request) {
+    @Render('admin/user/user')
+    async listUser(@Req() req: RequestCustomize) {
         const users = await this.userService.findAll();
-        return {
-            page: {
-                title: 'Users',
-                sidebar: SIDEBAR,
-                url: req.route.path,
+        return BaseRender(
+            req,
+            {
+                pageTitle: 'Users',
             },
-            data: {
+            {
                 users,
             },
-        };
+        );
     }
 
     @Get('create')
-    @Render('admin/user-create')
-    get_createUser(@Req() req: Request) {
-        return {
-            page: {
-                title: 'Create new account',
-                sidebar: SIDEBAR,
-                url: req.route.path,
+    @Render('admin/user/user-create')
+    get_createUser(@Req() req: RequestCustomize) {
+        return BaseRender(
+            req,
+            {
+                pageTitle: 'Create new account',
             },
-            data: {
+            {
                 email: req.flash('email')[0],
                 username: req.flash('username')[0],
                 role: req.flash('role')[0],
                 password: req.flash('password')[0],
             },
-            message: {
-                user_emailError: req.flash('user_email'),
-                user_usernameError: req.flash('user_username'),
-                user_roleError: req.flash('user_role'),
-                user_passwordError: req.flash('user_password'),
-            },
-        };
+        );
     }
 
     @Post('create')
     async post_createUser(
-        @Req() req: Request,
+        @Req() req: RequestCustomize,
         @Res() res: Response,
         @Body() body,
     ) {
@@ -128,25 +121,24 @@ export class UserController {
     }
 
     @Get('edit/:accountID')
-    @Render('admin/user-edit')
-    async get_editAccount(@Req() req: Request, @Param() params) {
+    @Render('admin/user/user-edit')
+    async get_editAccount(@Req() req: RequestCustomize, @Param() params) {
         const accountID = params.accountID;
         try {
             const user = await this.userService.findById(accountID);
             if (user) {
-                return {
-                    page: {
-                        title: 'Edit account',
-                        sidebar: SIDEBAR,
-                        url: req.route.path,
+                return BaseRender(
+                    req,
+                    {
+                        pageTitle: 'Edit account',
                     },
-                    data: {
+                    {
                         id: user.id,
                         username: user.username,
                         email: user.email,
                         role: user.role,
                     },
-                };
+                );
             }
         } catch (error) {
             console.error(error);

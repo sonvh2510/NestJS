@@ -1,6 +1,7 @@
 import {
     Controller,
     Get,
+    Redirect,
     Render,
     Req,
     UseFilters,
@@ -11,15 +12,27 @@ import { RequestCustomize } from 'src/interfaces/request-custom';
 import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
 import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
 
-@Controller('admin/dashboard')
+@Controller('admin/post')
 @UseGuards(AdminAuthJwtFilter)
 @UseFilters(AdminAuthAccessFilter)
-export class DashboardController {
+export class BlogController {
     @Get()
-    @Render('admin/dashboard/dashboard')
-    root(@Req() req: RequestCustomize) {
+    @Redirect('/admin/post/list')
+    root() {}
+
+    @Get('list')
+    @Render('admin/post/post')
+    listUser(@Req() req: RequestCustomize) {
         return BaseRender(req, {
-            pageTitle: 'Dashboard',
+            pageTitle: 'Users',
+        });
+    }
+
+    @Get('create')
+    @Render('admin/post/post-create')
+    get_createUser(@Req() req: RequestCustomize) {
+        return BaseRender(req, {
+            pageTitle: 'Create new account',
         });
     }
 }

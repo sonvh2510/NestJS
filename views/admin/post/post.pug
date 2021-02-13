@@ -1,0 +1,14 @@
+extends ../_layouts/layout
+
+block var
+	- bodyClass = "blog blog-list"
+	
+block main
+	.row
+		.col-12
+			.card
+				.card-header
+					h5 Post List
+					span.d-block.m-t-5 Show all posts
+				.card-body
+					+Pagination()

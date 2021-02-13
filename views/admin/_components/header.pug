@@ -1,5 +1,5 @@
 // [ Header ] start
-header.pc-header.bg-dark
+header.pc-header(class=theme.header_class)
 	.header-wrapper
 		.ml-auto
 			ul.list-unstyled
@@ -14,18 +14,16 @@ header.pc-header.bg-dark
 				li.dropdown.pc-h-item
 					a.pc-head-link.dropdown-toggle.arrow-none.mr-0(data-toggle='dropdown' href='#' role='button' aria-haspopup='false' aria-expanded='false')
 						img.user-avtar(src='/public/images/user/avatar-2.jpg' alt='user-image')
-						span
-							span.user-name Joseph William
-							span.user-desc Administrator
+						-if(user)
+							span
+								span.user-name #{user.username}
+								span.user-desc #{user.role}
 					.dropdown-menu.dropdown-menu-right.pc-h-dropdown
 						.dropdown-header
 							h6.text-overflow.m-0 Welcome !
-						a.dropdown-item(href='#!')
+						a.dropdown-item(href='/admin/account-setting')
 							span.fal.fa-user
 							span My Account
-						a.dropdown-item(href='#!')
-							span.fal.fa-user-cog
-							span Settings
 						a.dropdown-item(href='/admin/auth/signout')
 							span.fal.fa-sign-out
 							span Logout

@@ -35,4 +35,10 @@ export class UserEntity {
 
     @Column({ type: 'tinyint', default: 1 })
     is_enabled: boolean;
+
+    @Column({ length: 50, type: 'varchar', nullable: true })
+    sidebar_class: string;
+
+    @Column({ length: 50, type: 'varchar', nullable: true })
+    header_class: string;
 }

@@ -1,10 +1,17 @@
-import { Module } from '@nestjs/common';
+import {
+    MiddlewareConsumer,
+    Module,
+    NestModule,
+    RequestMethod,
+} from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { AuthenticateModule } from './authenticate/authenticate.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
 import { AdminController } from './admin.controller';
-import { BlogModule } from './blog/blog.module';
+import { BlogModule } from './post/post.module';
+import { AdminMiddleware } from 'src/middlewares/admin.middleware';
+import { AccountSettingModule } from './account-setting/account-setting.module';
 
 @Module({
     imports: [
@@ -17,8 +24,16 @@ import { BlogModule } from './blog/blog.module';
         DashboardModule,
         UserModule,
         BlogModule,
+        AccountSettingModule,
     ],
     providers: [],
     controllers: [AdminController],
 })
-export class AdminModule {}
+export class AdminModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(AdminMiddleware).forRoutes({
+            path: '/admin/**',
+            method: RequestMethod.GET,
+        });
+    }
+}

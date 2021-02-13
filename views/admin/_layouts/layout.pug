@@ -1,4 +1,8 @@
 block var
+block mixin
+	include ../_mixins/aside-bar
+	include ../_mixins/breadcrumb
+	include ../_mixins/pagination
 
 <!DOCTYPE html>
 html(lang="en")
@@ -7,17 +11,24 @@ html(lang="en")
 			include meta
 		block css
 			include css
-		title= page.title
+		-if(page.title)
+			title= page.title
+		-else
+			title Untitled
 	body(class=bodyClass)
 		block header
+			include ../_components/header
 		main
 			block sidebar
+				+SideBar(page.sidebar)
 			block breadcrumb
-			block main
-			// Change style of admin theme
+				section.pc-container
+					.pcoded-content
+						+Breadcrumb()
+						// Main Wrapper
+						block main
+		// Change style of admin theme
+		block custom-theme
 			include ../_components/custom-theme
-
-		block footer
-			include footer
 		block js
 			include js

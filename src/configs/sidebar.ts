@@ -22,28 +22,42 @@ export const SIDEBAR = [
                 ],
             },
             {
-                title: 'Blog',
-                url: '/admin/blog',
+                title: 'Article',
+                url: '/admin/post',
                 children: [
                     {
                         title: 'List',
-                        url: '/admin/blog/list',
+                        url: '/admin/post/list',
                     },
                     {
                         title: 'Create',
-                        url: '/admin/blog/create',
+                        url: '/admin/post/create',
                     },
                 ],
             },
         ],
     },
     {
-        label: 'My account',
-        caption: 'Change password',
+        label: 'Settings',
+        caption: 'All settings',
         children: [
             {
-                title: 'My account',
-                url: '/admin/my-account',
+                title: 'Account Settings',
+                url: '/admin/account-setting',
+                children: [
+                    {
+                        title: 'Overview',
+                        url: '/admin/account-setting/overview',
+                    },
+                    {
+                        title: 'Appearance',
+                        url: '/admin/account-setting/appearance',
+                    },
+                    {
+                        title: 'Securities',
+                        url: '/admin/account-setting/security',
+                    },
+                ],
             },
         ],
     },

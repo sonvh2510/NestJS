@@ -31,6 +31,7 @@ export class AuthenticateService {
         if (!match) {
             return null;
         }
+
         const { password, ...result } = user;
         return result;
     }
