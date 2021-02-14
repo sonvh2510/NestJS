@@ -1,6 +1,7 @@
 import { UserEntity } from '../entities/user.entity';
 import { createConnection } from 'typeorm';
 import { PostEntity } from 'src/entities/post.entity';
+import { CONFIGS } from 'src/configs/configs';
 
 export const DatabaseProviders = [
     {
@@ -8,10 +9,10 @@ export const DatabaseProviders = [
         useFactory: async () =>
             await createConnection({
                 type: 'mysql',
-                host: 'us-cdbr-east-03.cleardb.com',
-                username: 'b27b3f3a7e14de',
-                password: '99bc181b',
-                database: 'heroku_1b5e874b3b9063e',
+                host: CONFIGS.DATABASE.host,
+                database: CONFIGS.DATABASE.database,
+                username: CONFIGS.DATABASE.username,
+                password: CONFIGS.DATABASE.password,
                 entities: [UserEntity, PostEntity],
             }),
     },
