@@ -1,41 +1,24 @@
-import {
-    MiddlewareConsumer,
-    Module,
-    NestModule,
-    RequestMethod,
-} from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
+import { Module } from '@nestjs/common';
 import { AuthenticateController } from './authenticate.controller';
-import { AuthenticateService } from './authenticate.service';
-import { jwtConstants } from './contansts';
-import { AdminAuthJwtStrategy } from './admin-auth-jwt.strategy';
-import { AdminAuthLocalStrategy } from './admin-auth-local.strategy';
-import { SignInMiddleware } from '../../../middlewares/signin.middleware';
 import { DatabaseModule } from 'src/database/database.module';
+import { UserService } from 'src/database/user.service';
+import { PassportModule } from '@nestjs/passport';
+import { LocalStrategy } from './local.strategy';
+import { AuthenticateService } from './authenticate.service';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 
 @Module({
     imports: [
         DatabaseModule,
-        PassportModule,
+        PassportModule.register({
+            session: true,
+        }),
         JwtModule.register({
-            secret: jwtConstants.secret,
-            signOptions: { expiresIn: '3600s' },
+            secret: process.env.AUTH_SECRET_KEY,
+            signOptions: { expiresIn: '1800s' },
         }),
     ],
-    providers: [
-        AuthenticateService,
-        AdminAuthLocalStrategy,
-        AdminAuthJwtStrategy,
-    ],
+    providers: [UserService, AuthenticateService, LocalStrategy],
     controllers: [AuthenticateController],
-    exports: [AuthenticateService, PassportModule],
 })
-export class AuthenticateModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(SignInMiddleware).forRoutes({
-            path: '/admin/auth/signin',
-            method: RequestMethod.GET,
-        });
-    }
-}
+export class AuthenticateModule {}

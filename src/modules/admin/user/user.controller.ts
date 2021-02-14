@@ -12,17 +12,17 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { SIDEBAR } from 'src/configs/sidebar';
-import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
-import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
-import bcrypt = require('bcrypt');
+// import { SIDEBAR } from 'src/configs/sidebar';
+// import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
+// import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
 import { RequestCustomize } from 'src/interfaces';
 import { BaseRender } from 'src/helpers/base-render';
 import { UserService } from 'src/database/user.service';
+import bcrypt = require('bcrypt');
 
 @Controller('admin/user')
-@UseGuards(AdminAuthJwtFilter)
-@UseFilters(AdminAuthAccessFilter)
+// @UseGuards(AdminAuthJwtFilter)
+// @UseFilters(AdminAuthAccessFilter)
 export class UserController {
     constructor(private userService: UserService) {}
     @Get()

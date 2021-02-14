@@ -12,6 +12,7 @@ import { AdminController } from './admin.controller';
 import { PostModule } from './post/post.module';
 import { AdminMiddleware } from 'src/middlewares/admin.middleware';
 import { AccountSettingModule } from './account-setting/account-setting.module';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
     imports: [

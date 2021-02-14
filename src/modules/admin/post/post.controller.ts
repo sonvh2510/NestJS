@@ -4,17 +4,17 @@ import {
     Redirect,
     Render,
     Req,
-    UseFilters,
-    UseGuards,
+    // UseFilters,
+    // UseGuards,
 } from '@nestjs/common';
 import { BaseRender } from 'src/helpers/base-render';
 import { RequestCustomize } from 'src/interfaces';
-import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
-import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
+// import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
+// import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
 
 @Controller('admin/post')
-@UseGuards(AdminAuthJwtFilter)
-@UseFilters(AdminAuthAccessFilter)
+// @UseGuards(AdminAuthJwtFilter)
+// @UseFilters(AdminAuthAccessFilter)
 export class PostController {
     @Get()
     @Redirect('/admin/post/list')

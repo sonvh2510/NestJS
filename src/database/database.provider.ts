@@ -1,7 +1,6 @@
 import { UserEntity } from '../entities/user.entity';
 import { createConnection } from 'typeorm';
 import { PostEntity } from 'src/entities/post.entity';
-import { CONFIGS } from 'src/configs/configs';
 
 export const DatabaseProviders = [
     {
@@ -9,10 +8,10 @@ export const DatabaseProviders = [
         useFactory: async () =>
             await createConnection({
                 type: 'mysql',
-                host: CONFIGS.DATABASE.host,
-                database: CONFIGS.DATABASE.database,
-                username: CONFIGS.DATABASE.username,
-                password: CONFIGS.DATABASE.password,
+                host: process.env.DATABASE_HOST,
+                database: process.env.DATABASE_NAME,
+                username: process.env.DATABASE_USERNAME,
+                password: process.env.DATABASE_PASSWORD,
                 entities: [UserEntity, PostEntity],
             }),
     },
