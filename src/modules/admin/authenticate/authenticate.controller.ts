@@ -14,7 +14,7 @@ import { AuthenticateService } from './authenticate.service';
 import { AdminAuthLocalGuard } from './admin-auth-local.guard';
 import { AdminAuthAccessFilter } from './admin-auth-access.filter';
 import { AdminAuthJwtFilter } from './admin-auth-jwt.guard';
-import { RequestCustomize } from 'src/interfaces/request-custom';
+import { RequestCustomize } from 'src/interfaces';
 import { BaseRender } from 'src/helpers/base-render';
 
 @Controller('admin/auth')

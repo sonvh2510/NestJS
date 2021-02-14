@@ -1,5 +1,5 @@
 import { SIDEBAR } from 'src/configs/sidebar';
-import { RequestCustomize } from 'src/interfaces/request-custom';
+import { RequestCustomize } from 'src/interfaces';
 
 export const BaseRender = (
     req: RequestCustomize,

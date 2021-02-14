@@ -7,7 +7,7 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { BaseRender } from 'src/helpers/base-render';
-import { RequestCustomize } from 'src/interfaces/request-custom';
+import { RequestCustomize } from 'src/interfaces';
 import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
 import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
 

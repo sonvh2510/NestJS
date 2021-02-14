@@ -9,7 +9,7 @@ import { AuthenticateModule } from './authenticate/authenticate.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
 import { AdminController } from './admin.controller';
-import { BlogModule } from './post/post.module';
+import { PostModule } from './post/post.module';
 import { AdminMiddleware } from 'src/middlewares/admin.middleware';
 import { AccountSettingModule } from './account-setting/account-setting.module';
 
@@ -23,10 +23,9 @@ import { AccountSettingModule } from './account-setting/account-setting.module';
         AuthenticateModule,
         DashboardModule,
         UserModule,
-        BlogModule,
+        PostModule,
         AccountSettingModule,
     ],
-    providers: [],
     controllers: [AdminController],
 })
 export class AdminModule implements NestModule {

@@ -1,10 +1,10 @@
-import { UserEntity } from '../../entities/user.entity';
+import { UserEntity } from '../entities/user.entity';
 import { createConnection } from 'typeorm';
+import { PostEntity } from 'src/entities/post.entity';
 
 export const DatabaseProviders = [
     {
         provide: 'DATABASE_CONNECTION',
-
         useFactory: async () =>
             await createConnection({
                 type: 'mysql',
@@ -12,7 +12,7 @@ export const DatabaseProviders = [
                 username: 'b27b3f3a7e14de',
                 password: '99bc181b',
                 database: 'heroku_1b5e874b3b9063e',
-                entities: [UserEntity],
+                entities: [UserEntity, PostEntity],
             }),
     },
 ];

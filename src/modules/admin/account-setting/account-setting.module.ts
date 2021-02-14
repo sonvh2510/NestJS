@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
+import { DatabaseModule } from 'src/database/database.module';
 import { AccountSettingController } from './account-setting.controller';
-import { AccountSettingService } from './account-setting.service';
 
 @Module({
+    imports: [DatabaseModule],
     controllers: [AccountSettingController],
-    providers: [AccountSettingService],
 })
 export class AccountSettingModule {}

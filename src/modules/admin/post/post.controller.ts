@@ -8,14 +8,14 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { BaseRender } from 'src/helpers/base-render';
-import { RequestCustomize } from 'src/interfaces/request-custom';
+import { RequestCustomize } from 'src/interfaces';
 import { AdminAuthAccessFilter } from '../authenticate/admin-auth-access.filter';
 import { AdminAuthJwtFilter } from '../authenticate/admin-auth-jwt.guard';
 
 @Controller('admin/post')
 @UseGuards(AdminAuthJwtFilter)
 @UseFilters(AdminAuthAccessFilter)
-export class BlogController {
+export class PostController {
     @Get()
     @Redirect('/admin/post/list')
     root() {}

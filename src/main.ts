@@ -1,14 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {
-    ExpressAdapter,
-    NestExpressApplication,
-} from '@nestjs/platform-express';
 import { join } from 'path';
 import flash = require('connect-flash');
 import session = require('express-session');
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
+import {
+    ExpressAdapter,
+    NestExpressApplication,
+} from '@nestjs/platform-express';
 
 const PORT = process.env.PORT || 3000;
 
@@ -18,10 +18,10 @@ async function bootstrap() {
         new ExpressAdapter(),
     );
     app.use(compression());
+    app.use(cookieParser());
     app.enableCors({
         origin: '*',
     });
-    app.use(cookieParser());
     app.use(
         session({
             secret: 'secret_of_wibu',
@@ -31,11 +31,11 @@ async function bootstrap() {
         }),
     );
     app.use(flash());
+    app.setViewEngine('pug');
+    app.setBaseViewsDir(join(__dirname, '..', 'views'));
     app.useStaticAssets(join(__dirname, '..', 'public'), {
         prefix: '/public/',
     });
-    app.setViewEngine('pug');
-    app.setBaseViewsDir(join(__dirname, '..', 'views'));
     await app.listen(PORT);
 }
 bootstrap();

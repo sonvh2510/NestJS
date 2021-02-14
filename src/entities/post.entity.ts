@@ -1,34 +1,31 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('post')
-export class User {
+export class PostEntity {
     @PrimaryGeneratedColumn({
         type: 'int',
         unsigned: true,
     })
     id: number;
 
-    @Column({ length: 32, type: 'varchar' })
-    first_name: string;
+    @Column({ length: 255, type: 'varchar' })
+    title: string;
 
-    @Column({ length: 32, type: 'varchar' })
-    last_name: string;
+    @Column({ length: 255, type: 'varchar', unique: true })
+    url: string;
 
     @Column({ length: 255, type: 'varchar' })
-    email: string;
+    sub_title: string;
 
-    @Column({ length: 12, type: 'varchar' })
-    phone: string;
+    @Column({ type: 'text' })
+    description: string;
 
-    @Column({ length: 70, type: 'char' })
-    password: string;
+    @Column({ type: 'int', nullable: false })
+    author: number;
 
-    @Column({ type: 'date' })
+    @Column({ type: 'datetime', nullable: false })
     created_date: string;
 
-    @Column({ type: 'tinyint', default: 1 })
-    is_enabled: boolean;
-
-    @Column({ type: 'tinyint', default: 0 })
-    is_deleted: boolean;
+    @Column({ type: 'datetime', nullable: false })
+    last_edited: string;
 }
