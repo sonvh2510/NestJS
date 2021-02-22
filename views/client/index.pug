@@ -8,3 +8,6 @@ html(lang="en")
     body
         h1= message
         a(href="/admin") Click here to go to Admin page 
+        script.
+            var data = #{data} || {}
+            console.log(JSON.parse(data))
